@@ -40,6 +40,7 @@ public class PlayerRepository {
 //        template.update(sql, money, memberId);
 //    }
 
+
     public Player findById(String playerId) throws SQLException {
         String sql = "select * from Player where Id = ?";
         return template.queryForObject(sql, playerRowMapper(), playerId);

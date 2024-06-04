@@ -5,9 +5,7 @@ import com.example.TransMarket.repository.PlayerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -30,6 +28,17 @@ public class PlayerController {
     public String player(@PathVariable String playerId, Model model) throws SQLException {
         Player player = playerRepository.findById(playerId);
         model.addAttribute("player", player);
+        return "player";
+    }
+
+    @GetMapping("/add")
+    public String addForm() {
+        return "addForm";
+    }
+
+    @PostMapping("/add")
+    public String addPlayer(@ModelAttribute("player") Player player, Model model) throws SQLException {
+        playerRepository.save(player);
         return "player";
     }
 }
