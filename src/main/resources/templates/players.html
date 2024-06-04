@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link href="../static/css/bootstrap.min.css"
+          th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+</head>
+<body>
+<div class="container" style="max-width: 600px">
+    <div class="py-5 text-center">
+        <h2>선수 목록</h2>
+    </div>
+<!--    <div class="row">-->
+<!--        <div class="col">-->
+<!--            <button class="btn btn-primary float-end"-->
+<!--                    onclick="location.href='addForm.html'"-->
+<!--                    th:onclick="|location.href='@{/basic/items/add}'|" type="button">상품 등록</button>-->
+<!--        </div>-->
+<!--    </div>-->
+    <hr class="my-4">
+    <div>
+        <table class="table">
+            <thead>
+                <!-- dto 해야함 -->
+            <tr>
+<!--                <th>아이디</th>-->
+                <th>이름</th>
+                <th>나이</th>
+                <th>국적</th>
+                <th>클럽아이디</th>
+<!--                <th>중요도</th>-->
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="player : ${players}">
+                <td><a href="player.html" th:href="@{/players/{playerId} (playerId=${player.playerId})}" th:text="${player.playerName}">이름</a></td>
+<!--                <td th:text="${player.playerName}">이름</td>-->
+                <td th:text="${player.age}">나이</td>
+                <td th:text="${player.nationality}">나이</td>
+                <td th:text="${player.clubId}">클럽아이디</td>
+<!--                <td th:text="${item.importance}">중요도</td>-->
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div> <!-- /container -->
+</body>
+</html>

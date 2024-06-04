@@ -5,14 +5,18 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.JdbcUtils;
+import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
+@Repository
 public class PlayerRepository {
 
     private final JdbcTemplate template;
@@ -40,6 +44,12 @@ public class PlayerRepository {
         String sql = "select * from Player where Id = ?";
         return template.queryForObject(sql, playerRowMapper(), playerId);
     }
+
+    public List<Player> findAll() {
+        String sql = "select * from Player";
+        return template.query(sql, playerRowMapper());
+    }
+
     private RowMapper<Player> playerRowMapper() {
         return (rs, rowNum) -> {
             Player player = new Player();

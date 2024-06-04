@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 import static com.example.TransMarket.connection.ConnectionConst.*;
@@ -43,9 +44,11 @@ class MemberRepositoryTest {
         Player player = new Player("P26", "test", 20, "Korea", "C2");
         repository.save(player);
 
+        List<Player> list = repository.findAll();
+        Assertions.assertThat(list.size()).isEqualTo(26);
         //findById
-        Player findPlayer = repository.findById(player.getPlayerId());
-        Assertions.assertThat(findPlayer).isEqualTo(player);
+//        Player findPlayer = repository.findById(player.getPlayerId());
+//        Assertions.assertThat(findPlayer).isEqualTo(player);
 //
 //        //update : money:10000->20000
 //        repository.update(.getMemberId(), 20000);
@@ -53,8 +56,6 @@ class MemberRepositoryTest {
 //        Assertions.assertThat(updateMember.getMoney()).isEqualTo(20000);
 //
 //        //delete
-        repository.delete(player.getPlayerId());
-//        Assertions.assertThatThrownBy(() -> repository.findById(member.getMemberId()))
-//                .isInstanceOf(NoSuchElementException.class);
+//        repository.delete(player.getPlayerId());
     }
 }

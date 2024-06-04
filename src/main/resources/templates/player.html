@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link href="../css/bootstrap.min.css"
+          th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <style>
+        .container {
+            max-width: 560px;
+        } </style>
+</head>
+<body>
+<div class="container">
+    <div class="py-5 text-center">
+        <h2>선수 정보</h2> </div>
+    <div>
+        <label for="playerId">선수 ID</label>
+        <input type="text" id="playerId" name="playerId" class="form-control"
+               value="p1" th:value="${player.playerId}" readonly>
+    </div>
+    <div>
+        <label for="playerName">선수 이름</label>
+        <input type="text" id="playerName" name="playerName" class="form-control"
+                value="playerA" th:value="${player.playerName}" readonly>
+    </div>
+    <div>
+        <label for="age">나이</label>
+        <input type="text" id="age" name="age" class="form-control"
+               value="10" th:value="${player.age}" readonly>
+    </div>
+    <div>
+        <label for="nationality">국적</label>
+        <input type="text" id="nationality" name="nationality" class="form-control"
+                value="korea" th:value="${player.nationality}" readonly>
+    </div>
+    <div>
+        <label for="clubId">클럽 아이디</label>
+        <input type="text" id="clubId" name="clubId" class="form-control"
+                value="c19" th:value="${player.clubId}" readonly>
+    </div>
+
+    <hr class="my-4">
+    <div class="row">
+<!--        <div class="col">-->
+<!--            <button class="w-100 btn btn-primary btn-lg"-->
+<!--                    onclick="location.href='editForm.html'"-->
+<!--                    th:onclick="|location.href='@{/basic/items/{itemId}/ edit(itemId=${item.id})}'|"type="button">상품 수정</button>-->
+<!--        </div>-->
+        <div class="col">
+            <button class="w-100 btn btn-secondary btn-lg"
+                    onclick="location.href='items.html'"
+                    th:onclick="|location.href='@{/players}'|" type="button">선수 목록</button>
+        </div>
+    </div>
+</div> <!-- /container -->
+</body>
+</html>
