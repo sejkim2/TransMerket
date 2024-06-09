@@ -45,7 +45,9 @@ public class PlayerController {
     @GetMapping("/{playerId}")
     public String player(@PathVariable String playerId, Model model) throws SQLException {
         Player player = playerRepository.findById(playerId);
+        String clubName = clubRepository.findClubNameByclubId(player.getClubId());
         model.addAttribute("player", player);
+        model.addAttribute("clubName", clubName);
         return "player";
     }
 
@@ -55,8 +57,22 @@ public class PlayerController {
     }
 
     @PostMapping("/add")
-    public String addPlayer(@ModelAttribute("player") Player player, Model model) throws SQLException {
+    public String addPlayer(@RequestParam String playerName,
+                            @RequestParam int age,
+                            @RequestParam String nationality,
+                            @RequestParam String clubName,
+                            @RequestParam Character importance,
+                            Model model
+    ) throws SQLException {
+        Player player = new Player();
+        player.setPlayerName(playerName);
+        player.setAge(age);
+        player.setNationality(nationality);
+        player.setClubId(clubRepository.findClubIdByClubName(clubName));
+        player.setImportance(importance);
         playerRepository.save(player);
+        model.addAttribute("player", player);
+        model.addAttribute("clubName", clubName);
         return "player";
     }
 }

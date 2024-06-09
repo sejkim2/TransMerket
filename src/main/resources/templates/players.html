@@ -32,7 +32,8 @@
             <tr th:each="player : ${players}">
                 <td><a href="player.html" th:href="@{/players/{playerId} (playerId=${player.playerId})}" th:text="${player.playerName}">이름</a></td>
                 <td th:text="${player.age}">나이</td>
-                <td th:text="${player.clubName}">클럽이름</td>
+                <td th:if="${player.clubName == null}">소속팀없음</td>
+                <td th:if="${player.clubName != null}" th:text="${player.clubName}">클럽이름</td>
             </tr>
             </tbody>
         </table>

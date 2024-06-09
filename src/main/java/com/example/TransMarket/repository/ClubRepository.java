@@ -85,6 +85,16 @@ public class ClubRepository {
             return null;
         }
     }
+
+    public String findClubIdByClubName(String clubName) {
+        try {
+            String sql = "select Club.Id from Club where Club.Name = ?";
+            return template.queryForObject(sql, new Object[]{clubName}, String.class);
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
+    }
+
     private void close(Connection con, Statement stmt, ResultSet rs) {
         JdbcUtils.closeResultSet(rs);
         JdbcUtils.closeStatement(stmt);
