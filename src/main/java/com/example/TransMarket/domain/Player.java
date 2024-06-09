@@ -13,7 +13,6 @@ public class Player {
     private int age;
     private String nationality;
     private String clubId;
-//    private char importance;
     private Character importance; // Nullable
 
 

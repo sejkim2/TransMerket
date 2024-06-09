@@ -10,6 +10,9 @@ public class Club {
     private String leagueId;
     private int wins;
 
+    public Club() {
+    }
+
     public Club(String clubId, String clubName, String leagueId, int wins) {
         this.clubId = clubId;
         this.clubName = clubName;

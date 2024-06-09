@@ -22,24 +22,17 @@
     <div>
         <table class="table">
             <thead>
-                <!-- dto 해야함 -->
             <tr>
-<!--                <th>아이디</th>-->
                 <th>이름</th>
                 <th>나이</th>
-                <th>국적</th>
-                <th>클럽아이디</th>
-<!--                <th>중요도</th>-->
+                <th>클럽이름</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="player : ${players}">
                 <td><a href="player.html" th:href="@{/players/{playerId} (playerId=${player.playerId})}" th:text="${player.playerName}">이름</a></td>
-<!--                <td th:text="${player.playerName}">이름</td>-->
                 <td th:text="${player.age}">나이</td>
-                <td th:text="${player.nationality}">나이</td>
-                <td th:text="${player.clubId}">클럽아이디</td>
-<!--                <td th:text="${item.importance}">중요도</td>-->
+                <td th:text="${player.clubName}">클럽이름</td>
             </tr>
             </tbody>
         </table>
