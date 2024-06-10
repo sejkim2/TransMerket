@@ -61,7 +61,7 @@ public class PlayerController {
                             @RequestParam int age,
                             @RequestParam String nationality,
                             @RequestParam String clubName,
-                            @RequestParam Character importance,
+//                            @RequestParam(required = false) Character importance,
                             Model model
     ) throws SQLException {
         Player player = new Player();
@@ -69,8 +69,10 @@ public class PlayerController {
         player.setAge(age);
         player.setNationality(nationality);
         player.setClubId(clubRepository.findClubIdByClubName(clubName));
-        player.setImportance(importance);
-        playerRepository.save(player);
+        if (playerRepository.save(player) == null) {
+            model.addAttribute("errorMessage", "Invalid ClubId: Club does not exist. Please try again.");
+            return "addForm";  // 다시 입력 페이지로 리다이렉트
+        }
         model.addAttribute("player", player);
         model.addAttribute("clubName", clubName);
         return "player";

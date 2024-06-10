@@ -2,9 +2,12 @@ package com.example.TransMarket.repository;
 
 import com.example.TransMarket.domain.Player;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.JdbcUtils;
+import org.springframework.jdbc.support.SQLExceptionTranslator;
+import org.springframework.jdbc.support.SQLStateSQLExceptionTranslator;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
@@ -68,11 +71,17 @@ public class PlayerRepository {
 
     public Player save(Player player) throws SQLException {
         String sql = "insert into Player(Id, Name, Age, Nationality, ClubId) values(?, ?, ?, ?, ?)";
-        template.update(sql, player.getPlayerId(),
-                player.getPlayerName(),
-                player.getAge(),
-                player.getNationality(),
-                player.getClubId());
+        try {
+            template.update(sql, player.getPlayerId(),
+                    player.getPlayerName(),
+                    player.getAge(),
+                    player.getNationality(),
+                    player.getClubId());
+        } catch (DataAccessException e) {
+            SQLExceptionTranslator translator = new SQLStateSQLExceptionTranslator();
+            Throwable rootCause = translator.translate("Player Save", sql, (SQLException) e.getCause());
+            return null;
+        }
         return player;
     }
 

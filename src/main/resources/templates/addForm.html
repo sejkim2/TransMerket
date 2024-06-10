@@ -14,6 +14,7 @@
     <div class="py-5 text-center"> <h2>선수 등록 폼</h2>
     </div>
     <h4 class="mb-3">선수 등록</h4>
+    <div th:if="${errorMessage}" th:text="${errorMessage}" style="color: red;"></div>
     <form action="player.html" th:action method="post">
         <div>
             <label for="playerName">선수 이름</label>
@@ -29,10 +30,6 @@
         <div>
             <label for="clubName">클럽이름</label>
             <input type="text" id="clubName" name="clubName" class="form-control"placeholder="클럽을 입력하세요">
-        </div>
-        <div>
-            <label for="importance">중요도</label>
-            <input type="text" id="importance" name="importance" class="form-control"placeholder="중요도를 입력하세요">
         </div>
         <hr class="my-4">
         <div class="row">
