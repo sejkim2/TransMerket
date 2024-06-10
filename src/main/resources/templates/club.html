@@ -2,26 +2,24 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
-    <link href="../static/css/bootstrap.min.css"
-          th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
 </head>
 <body>
 <div class="container" style="max-width: 600px">
     <div class="py-5 text-center">
-        <h2>선수 목록</h2>
+        <h2><span th:text="${clubName}"></span></h2> <!-- clubName 출력 -->
     </div>
     <hr class="my-4">
     <div>
         <table class="table">
             <thead>
             <tr>
-                <th>이름</th>
+                <th>선수 이름</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="Name : ${roster}">
-                <td th:text="${Name}">이름</td>
-<!--                <td><a href="player.html" th:href="@{/players/{playerId} (playerId=${player.playerId})}" th:text="${player.Name}">이름</a></td>-->
+            <tr th:each="club : ${roster}">
+                <td th:text="${club}">선수 이름</td>
             </tr>
             </tbody>
         </table>

@@ -1,22 +1,16 @@
 package com.example.TransMarket.repository;
 
-import com.example.TransMarket.connection.ConnectionConst;
-import com.example.TransMarket.domain.Member;
 import com.example.TransMarket.domain.Player;
 import com.zaxxer.hikari.HikariDataSource;
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 import static com.example.TransMarket.connection.ConnectionConst.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 @Slf4j
 class MemberRepositoryTest {
