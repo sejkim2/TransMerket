@@ -38,22 +38,8 @@
         <input type="text" id="importance" name="importance" class="form-control"
                th:value="${player.importance != null ? player.importance : 'N'}" readonly>
     </div>
-
-
-
-    <!--    <div>-->
-<!--        <label for="clubId">클럽 이름</label>-->
-<!--        <input type="text" id="clubId" name="clubId" class="form-control"-->
-<!--                value="c19" th:value="${player.clubId}" readonly>-->
-<!--    </div>-->
-
     <hr class="my-4">
     <div class="row">
-<!--        <div class="col">-->
-<!--            <button class="w-100 btn btn-primary btn-lg"-->
-<!--                    onclick="location.href='editForm.html'"-->
-<!--                    th:onclick="|location.href='@{/basic/items/{itemId}/ edit(itemId=${item.id})}'|"type="button">상품 수정</button>-->
-<!--        </div>-->
         <div class="col">
             <button class="w-100 btn btn-secondary btn-lg"
                     onclick="location.href='items.html'"
