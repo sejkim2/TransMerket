@@ -1,5 +1,6 @@
 package com.example.TransMarket.web.player;
 
+import com.example.TransMarket.domain.Career;
 import com.example.TransMarket.domain.Player;
 import com.example.TransMarket.domain.Position;
 import com.example.TransMarket.dto.playerDTO;
@@ -26,6 +27,7 @@ public class PlayerController {
     private final TrophyRepository trophyRepository;
     private final AvailablePositionRepository availablePositionRepository;
     private final PositionRepository positionRepository;
+    private final CareerRepository careerRepository;
 
     @GetMapping
     public String players(Model model) {
@@ -81,6 +83,10 @@ public class PlayerController {
         player.setAge(age);
         player.setNationality(nationality);
 
+        if (age <= 0) {
+            model.addAttribute("errorMessage", "Age is not minus. Please try again.");
+            return "addForm";
+        }
         if (clubName != "" && clubRepository.findClubIdByClubName(clubName) == null) {
             model.addAttribute("errorMessage", "Club not null but does not exist. Please try again.");
             return "addForm";
@@ -114,6 +120,34 @@ public class PlayerController {
         if (availablePositionRepository.save(playerId, positionId) == null) {
             model.addAttribute("errorMessage", "Position does not exist. Please try again.");
             return "addPosition";
+        }
+        return "redirect:/players/{playerId}";
+    }
+
+    @GetMapping("{playerId}/addCareer")
+    public String addCareer() {
+        return "addCareer";
+    }
+
+    @PostMapping("{playerId}/addCareer")
+    public String addCareers(@PathVariable String playerId,
+                             @RequestParam String trophyName,
+                             @RequestParam String season,
+                             Model model) throws SQLException {
+
+        String trophyId = trophyRepository.findTrophyIdByName(trophyName);
+        if (trophyId == null) {
+            model.addAttribute("errorMessage", "Trophy does not exist. Please try again.");
+            return "addCareer";
+        }
+        Career career = new Career();
+        career.setPlayerId(playerId);
+        career.setTrophyId(trophyId);
+        career.setSeason(season);
+
+        if (careerRepository.save(career) == null) {
+            model.addAttribute("errorMessage", "Trophy does not exist. Please try again.");
+            return "addCareer";
         }
         return "redirect:/players/{playerId}";
     }

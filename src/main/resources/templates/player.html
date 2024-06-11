@@ -59,22 +59,24 @@
             </tbody>
         </table>
     </div>
-
-
     <hr class="my-4">
     <div>
-        <h3>획득한 트로피</h3>
+        <div style="display: flex; align-items: center;">
+            <h3 style="flex: 1;">획득한 트로피</h3>
+            <button class="btn btn-primary" style="margin-left: 10px;" th:onclick="|location.href='@{/players/{playerId}/addCareer(playerId=${player.playerId})}'|">커리어 추가</button>
+        </div>
+<!--        <h3>획득한 트로피</h3>-->
         <table class="table">
             <thead>
             <tr>
                 <th>트로피</th>
-                <th>년도</th>
+                <th>시즌</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="trophy : ${trophys}">
                 <td th:text="${trophy.trophyName}">트로피</td>
-                <td th:text="${trophy.season}">년도</td>
+                <td th:text="${trophy.season}">시즌</td>
             </tr>
             </tbody>
         </table>

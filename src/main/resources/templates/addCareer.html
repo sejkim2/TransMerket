@@ -11,30 +11,22 @@
 </head>
 <body>
 <div class="container">
-    <div class="py-5 text-center"> <h2>선수 등록 폼</h2>
+    <div class="py-5 text-center"> <h2>커리어 추가 폼</h2>
     </div>
-    <h4 class="mb-3">선수 등록</h4>
     <div th:if="${errorMessage}" th:text="${errorMessage}" style="color: red;"></div>
     <form action="player.html" th:action method="post">
         <div>
-            <label for="playerName">선수 이름</label>
-            <input type="text" id="playerName" name="playerName" class="form-control"placeholder="이름을 입력하세요"> </div>
-        <div>
-            <label for="age">나이</label>
-            <input type="number" id="age" name="age" class="form-control" placeholder="나이를 입력하세요">
+            <label for="trophyName">트로피 이름</label>
+            <input type="text" id="trophyName" name="trophyName" class="form-control"placeholder="트로피를 입력하세요">
         </div>
         <div>
-            <label for="nationality">국적</label>
-            <input type="text" id="nationality" name="nationality" class="form-control"placeholder="국적을 입력하세요">
-        </div>
-        <div>
-            <label for="clubName">클럽이름</label>
-            <input type="text" id="clubName" name="clubName" class="form-control"placeholder="클럽을 입력하세요">
+            <label for="season">해당 시즌</label>
+            <input type="text" id="season" name="season" class="form-control"placeholder="우승 년도를 입력하세요">
         </div>
         <hr class="my-4">
         <div class="row">
             <div class="col">
-                <button class="w-100 btn btn-primary btn-lg" type="submit">선수 등록</button>
+                <button class="w-100 btn btn-primary btn-lg" type="submit">커리어 추가</button>
             </div>
             <div class="col">
                 <button class="w-100 btn btn-secondary btn-lg"

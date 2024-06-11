@@ -52,6 +52,15 @@ public class TrophyRepository {
         };
     }
 
+    public String findTrophyIdByName(String trophyName) {
+        String sql = "select Id from Trophy where Name = ?";
+        try {
+            return template.queryForObject(sql, new Object[]{trophyName}, String.class);
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
+    }
+
     private void close(Connection con, Statement stmt, ResultSet rs) {
         JdbcUtils.closeResultSet(rs);
         JdbcUtils.closeStatement(stmt);
