@@ -35,12 +35,6 @@ public class ClubRepository {
         template.update(sql, clubId);
     }
 
-//    public void update(String memberId, int money) throws SQLException {
-//        String sql = "update member set money=? where member_id=?";
-//        template.update(sql, money, memberId);
-//    }
-
-
     public Club findById(String clubId) throws SQLException {
         String sql = "select * from Club where Id = ?";
         return template.queryForObject(sql, clubRowMapper(), clubId);
@@ -71,11 +65,6 @@ public class ClubRepository {
         return club;
     }
 
-//    public String findClubNameByclubId(String clubId) {
-//        String sql = "select Club.Name from Club where Id = ?";
-//        return template.queryForObject(sql, new Object[]{clubId}, String.class);
-//    }
-
     public String findClubNameByclubId(String clubId) {
         try {
             String sql = "select Club.Name from Club where Id = ?";
@@ -93,6 +82,11 @@ public class ClubRepository {
         } catch (EmptyResultDataAccessException e) {
             return null;
         }
+    }
+
+    public int getClubPlayerCount(String clubName) {
+        String sql = "SELECT GetClubPlayerCount(?)";
+        return template.queryForObject(sql, Integer.class, clubName);
     }
 
     private void close(Connection con, Statement stmt, ResultSet rs) {

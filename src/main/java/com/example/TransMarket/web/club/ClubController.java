@@ -36,9 +36,11 @@ public class ClubController {
         List<clubDTO> dtoList = new ArrayList<>();
 
         for (Club club : list) {
+            int numOfPlayers = clubRepository.getClubPlayerCount(club.getClubName());
             clubDTO c = new clubDTO(club.getClubId());
             c.setClubName(club.getClubName());
             c.setLeagueName(leagueRepository.findNameById(club.getLeagueId()));
+            c.setNumOfPlayers(numOfPlayers);
 
             dtoList.add(c);
         }

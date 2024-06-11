@@ -17,12 +17,14 @@
             <tr>
                 <th>클럽 이름</th>
                 <th>리그 이름</th>
+                <th>선수 수</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="club : ${clubs}">
                 <td><a href="club.html" th:href="@{/clubs/{clubId} (clubId=${club.clubId})}" th:text="${club.clubName}">클럽 이름</a></td>
                 <td th:text="${club.leagueName}">리그 이름</td>
+                <td th:text="${club.numOfPlayers}">선수 수</td>
             </tr>
             </tbody>
         </table>

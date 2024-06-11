@@ -83,10 +83,16 @@ public class PlayerController {
         player.setAge(age);
         player.setNationality(nationality);
 
+        if (playerName == null || playerName.length() == 0) {
+            model.addAttribute("errorMessage", "playerName is not empty. Please try again.");
+            return "addForm";
+        }
+
         if (age <= 0) {
             model.addAttribute("errorMessage", "Age is not minus. Please try again.");
             return "addForm";
         }
+
         if (clubName != "" && clubRepository.findClubIdByClubName(clubName) == null) {
             model.addAttribute("errorMessage", "Club not null but does not exist. Please try again.");
             return "addForm";
@@ -140,6 +146,7 @@ public class PlayerController {
             model.addAttribute("errorMessage", "Trophy does not exist. Please try again.");
             return "addCareer";
         }
+
         Career career = new Career();
         career.setPlayerId(playerId);
         career.setTrophyId(trophyId);
