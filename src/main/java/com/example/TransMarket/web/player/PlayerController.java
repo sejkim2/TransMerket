@@ -2,8 +2,10 @@ package com.example.TransMarket.web.player;
 
 import com.example.TransMarket.domain.Player;
 import com.example.TransMarket.dto.playerDTO;
+import com.example.TransMarket.dto.trophyDTO;
 import com.example.TransMarket.repository.ClubRepository;
 import com.example.TransMarket.repository.PlayerRepository;
+import com.example.TransMarket.repository.TrophyRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -22,6 +24,7 @@ public class PlayerController {
 
     private final PlayerRepository playerRepository;
     private final ClubRepository clubRepository;
+    private final TrophyRepository trophyRepository;
 
     @GetMapping
     public String players(Model model) {
@@ -44,10 +47,14 @@ public class PlayerController {
 
     @GetMapping("/{playerId}")
     public String player(@PathVariable String playerId, Model model) throws SQLException {
+
         Player player = playerRepository.findById(playerId);
         String clubName = clubRepository.findClubNameByclubId(player.getClubId());
+        List<trophyDTO> trophys = trophyRepository.findTrophyByPlayerId(playerId);
+
         model.addAttribute("player", player);
         model.addAttribute("clubName", clubName);
+        model.addAttribute("trophys", trophys);
         return "player";
     }
 

@@ -7,16 +7,18 @@
     <style>
         .container {
             max-width: 560px;
-        } </style>
+        }
+    </style>
 </head>
 <body>
 <div class="container">
     <div class="py-5 text-center">
-        <h2>선수 정보</h2> </div>
+        <h2>선수 정보</h2>
+    </div>
     <div>
         <label for="playerName">선수 이름</label>
         <input type="text" id="playerName" name="playerName" class="form-control"
-                value="playerA" th:value="${player.playerName}" readonly>
+               value="playerA" th:value="${player.playerName}" readonly>
     </div>
     <div>
         <label for="age">나이</label>
@@ -26,7 +28,7 @@
     <div>
         <label for="nationality">국적</label>
         <input type="text" id="nationality" name="nationality" class="form-control"
-                value="korea" th:value="${player.nationality}" readonly>
+               value="korea" th:value="${player.nationality}" readonly>
     </div>
     <div>
         <label for="clubName">클럽 이름</label>
@@ -39,6 +41,23 @@
                th:value="${player.importance != null ? player.importance : 'N'}" readonly>
     </div>
     <hr class="my-4">
+    <div>
+        <h3>획득한 트로피</h3>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>트로피</th>
+                <th>년도</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="trophy : ${trophys}">
+                <td th:text="${trophy.trophyName}">트로피</td>
+                <td th:text="${trophy.season}">년도</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
     <div class="row">
         <div class="col">
             <button class="w-100 btn btn-secondary btn-lg"
