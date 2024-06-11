@@ -3,11 +3,25 @@
 <head>
     <meta charset="utf-8">
     <link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <style>
+        .club-info {
+            text-align: center;
+            position: relative;
+        }
+        .manager-info {
+            text-align: right;
+            margin-top: 10px; /* Adjust this value to control the vertical spacing */
+        }
+    </style>
 </head>
 <body>
 <div class="container" style="max-width: 600px">
-    <div class="py-5 text-center">
+    <div class="py-5 club-info">
         <h2><span th:text="${clubName}"></span></h2> <!-- clubName 출력 -->
+        <div class="manager-info">
+            감독: <span th:if="${clubManager != null}" th:text="${clubManager}"></span>
+            <span th:if="${clubManager == null}">없음</span>
+        </div>
     </div>
     <hr class="my-4">
     <div>

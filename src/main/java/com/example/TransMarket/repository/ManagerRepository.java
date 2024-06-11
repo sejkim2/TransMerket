@@ -3,11 +3,13 @@ package com.example.TransMarket.repository;
 import com.example.TransMarket.domain.Manager;
 import com.example.TransMarket.domain.Player;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.JdbcUtils;
 import org.springframework.jdbc.support.SQLExceptionTranslator;
 import org.springframework.jdbc.support.SQLStateSQLExceptionTranslator;
+import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -16,6 +18,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
+@Repository
 public class ManagerRepository {
     private final JdbcTemplate template;
 
@@ -35,7 +38,11 @@ public class ManagerRepository {
 
     public String findManagerByClubId(String clubId) {
         String sql = "select Manager.Name from Manager where Manager.ClubId = ?";
-
+        try {
+            return template.queryForObject(sql, new Object[]{clubId}, String.class);
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
     }
 //    public Manager findById(String managerId) throws SQLException {
 //        String sql = "select * from Manager where Id = ?";

@@ -6,6 +6,7 @@ import com.example.TransMarket.dto.clubDTO;
 import com.example.TransMarket.dto.playerDTO;
 import com.example.TransMarket.repository.ClubRepository;
 import com.example.TransMarket.repository.LeagueRepository;
+import com.example.TransMarket.repository.ManagerRepository;
 import com.example.TransMarket.repository.RosterRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,6 +28,7 @@ public class ClubController {
     private final ClubRepository clubRepository;
     private final LeagueRepository leagueRepository;
     private final RosterRepository rosterRepository;
+    private final ManagerRepository managerRepository;
 
     @GetMapping
     public String clubs(Model model) {
@@ -49,9 +51,13 @@ public class ClubController {
     @GetMapping("/{clubId}")
     public String club(@PathVariable String clubId, Model model) {
         String clubName = clubRepository.findClubNameByclubId(clubId);
+        String clubManager = managerRepository.findManagerByClubId(clubId);
         List<String> roster = rosterRepository.showAllPlayerName(clubName);
+
         model.addAttribute("roster", roster);
+        model.addAttribute("clubManager", clubManager);
         model.addAttribute("clubName", clubName);
+
         return "club";
     }
 }
