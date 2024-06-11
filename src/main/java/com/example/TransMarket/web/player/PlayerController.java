@@ -76,10 +76,12 @@ public class PlayerController {
 //                            @RequestParam(required = false) Character importance,
                             Model model
     ) throws SQLException {
+
         Player player = new Player();
         player.setPlayerName(playerName);
         player.setAge(age);
         player.setNationality(nationality);
+
         if (clubName != "" && clubRepository.findClubIdByClubName(clubName) == null) {
             model.addAttribute("errorMessage", "Club not null but does not exist. Please try again.");
             return "addForm";
@@ -89,6 +91,7 @@ public class PlayerController {
             model.addAttribute("errorMessage", "Club does not exist. Please try again.");
             return "addForm";
         }
+
         model.addAttribute("player", player);
         model.addAttribute("clubName", clubName);
         return "player";
