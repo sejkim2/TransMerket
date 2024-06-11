@@ -3,6 +3,7 @@ package com.example.TransMarket.web.player;
 import com.example.TransMarket.domain.Player;
 import com.example.TransMarket.dto.playerDTO;
 import com.example.TransMarket.dto.trophyDTO;
+import com.example.TransMarket.repository.AvailablePositionRepository;
 import com.example.TransMarket.repository.ClubRepository;
 import com.example.TransMarket.repository.PlayerRepository;
 import com.example.TransMarket.repository.TrophyRepository;
@@ -25,6 +26,7 @@ public class PlayerController {
     private final PlayerRepository playerRepository;
     private final ClubRepository clubRepository;
     private final TrophyRepository trophyRepository;
+    private final AvailablePositionRepository positionRepository;
 
     @GetMapping
     public String players(Model model) {
@@ -51,10 +53,13 @@ public class PlayerController {
         Player player = playerRepository.findById(playerId);
         String clubName = clubRepository.findClubNameByclubId(player.getClubId());
         List<trophyDTO> trophys = trophyRepository.findTrophyByPlayerId(playerId);
+        List<String> positions = positionRepository.displayAvailablePostionByPlayerId(playerId);
 
         model.addAttribute("player", player);
         model.addAttribute("clubName", clubName);
         model.addAttribute("trophys", trophys);
+        model.addAttribute("positions", positions);
+
         return "player";
     }
 

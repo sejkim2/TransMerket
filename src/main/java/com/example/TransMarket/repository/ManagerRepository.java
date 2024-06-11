@@ -44,15 +44,6 @@ public class ManagerRepository {
             return null;
         }
     }
-//    public Manager findById(String managerId) throws SQLException {
-//        String sql = "select * from Manager where Id = ?";
-//        return template.queryForObject(sql, managerRowMapper(), managerId);
-//    }
-//
-//    private RowMapper<Manager> managerRowMapper() {
-//        return null;
-//    }
-
 
     private void close(Connection con, Statement stmt, ResultSet rs) {
         JdbcUtils.closeResultSet(rs);

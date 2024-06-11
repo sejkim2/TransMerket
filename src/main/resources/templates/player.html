@@ -42,6 +42,22 @@
     </div>
     <hr class="my-4">
     <div>
+        <h3>가능한 포지션</h3>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>포지션</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="position : ${positions}">
+                <td th:text="${position}">포지션</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <hr class="my-4">
+    <div>
         <h3>획득한 트로피</h3>
         <table class="table">
             <thead>
