@@ -42,6 +42,11 @@ public class CareerRepository {
         return career;
     }
 
+    public int GetPlayerTrophyCount(String playerName) {
+        String sql = "SELECT GetPlayerTrophyCount(?)";
+        return template.queryForObject(sql, Integer.class, playerName);
+    }
+
     private void close(Connection con, Statement stmt, ResultSet rs) {
         JdbcUtils.closeResultSet(rs);
         JdbcUtils.closeStatement(stmt);

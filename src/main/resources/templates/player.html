@@ -62,10 +62,13 @@
     <hr class="my-4">
     <div>
         <div style="display: flex; align-items: center;">
-            <h3 style="flex: 1;">획득한 트로피</h3>
+            <h3 style="flex: 1;">
+                <span th:if="${numOfTrophy eq 0}">트로피가 없습니다.</span>
+                <span th:if="${numOfTrophy eq 1}">총 1개 트로피</span>
+                <span th:if="${numOfTrophy > 1}" th:text="'총 ' + ${numOfTrophy} + '개 트로피'">총 1개 이상</span>
+            </h3>
             <button class="btn btn-primary" style="margin-left: 10px;" th:onclick="|location.href='@{/players/{playerId}/addCareer(playerId=${player.playerId})}'|">커리어 추가</button>
         </div>
-<!--        <h3>획득한 트로피</h3>-->
         <table class="table">
             <thead>
             <tr>
@@ -81,6 +84,8 @@
             </tbody>
         </table>
     </div>
+
+
     <div class="row">
         <div class="col">
             <button class="w-100 btn btn-secondary btn-lg"

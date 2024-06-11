@@ -55,11 +55,13 @@ public class PlayerController {
         String clubName = clubRepository.findClubNameByclubId(player.getClubId());
         List<trophyDTO> trophys = trophyRepository.findTrophyByPlayerId(playerId);
         List<String> positions = availablePositionRepository.displayAvailablePostionByPlayerId(playerId);
+        int numOfTrophy = careerRepository.GetPlayerTrophyCount(player.getPlayerName());
 
         model.addAttribute("player", player);
         model.addAttribute("clubName", clubName);
         model.addAttribute("trophys", trophys);
         model.addAttribute("positions", positions);
+        model.addAttribute("numOfTrophy", numOfTrophy);
 
         return "player";
     }
