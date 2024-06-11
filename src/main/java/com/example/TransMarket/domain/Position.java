@@ -7,8 +7,6 @@ public class Position {
     private String positionId;
     private String positionName;
 
-    public Position(String positionId, String positionName) {
-        this.positionId = positionId;
-        this.positionName = positionName;
+    public Position() {
     }
 }

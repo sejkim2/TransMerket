@@ -32,11 +32,19 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="club : ${roster}">
-                <td th:text="${club}">선수 이름</td>
+            <tr th:each="playerName : ${roster}">
+<!--                <td><a href="player.html" th:href="@{/players/{playerId} (playerId=${player.playerId})}" th:text="${player.playerName}">이름</a></td>-->
+                <td th:text="${playerName}">선수 이름</td>
             </tr>
             </tbody>
         </table>
+    </div>
+    <div class="row">
+        <div class="col">
+            <button class="w-100 btn btn-secondary btn-lg"
+                    onclick="location.href='items.html'"
+                    th:onclick="|location.href='@{/clubs}'|" type="button">클럽 목록</button>
+        </div>
     </div>
 </div> <!-- /container -->
 </body>

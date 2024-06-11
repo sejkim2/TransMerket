@@ -1,12 +1,10 @@
 package com.example.TransMarket.web.player;
 
 import com.example.TransMarket.domain.Player;
+import com.example.TransMarket.domain.Position;
 import com.example.TransMarket.dto.playerDTO;
 import com.example.TransMarket.dto.trophyDTO;
-import com.example.TransMarket.repository.AvailablePositionRepository;
-import com.example.TransMarket.repository.ClubRepository;
-import com.example.TransMarket.repository.PlayerRepository;
-import com.example.TransMarket.repository.TrophyRepository;
+import com.example.TransMarket.repository.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -26,7 +24,8 @@ public class PlayerController {
     private final PlayerRepository playerRepository;
     private final ClubRepository clubRepository;
     private final TrophyRepository trophyRepository;
-    private final AvailablePositionRepository positionRepository;
+    private final AvailablePositionRepository availablePositionRepository;
+    private final PositionRepository positionRepository;
 
     @GetMapping
     public String players(Model model) {
@@ -53,7 +52,7 @@ public class PlayerController {
         Player player = playerRepository.findById(playerId);
         String clubName = clubRepository.findClubNameByclubId(player.getClubId());
         List<trophyDTO> trophys = trophyRepository.findTrophyByPlayerId(playerId);
-        List<String> positions = positionRepository.displayAvailablePostionByPlayerId(playerId);
+        List<String> positions = availablePositionRepository.displayAvailablePostionByPlayerId(playerId);
 
         model.addAttribute("player", player);
         model.addAttribute("clubName", clubName);
@@ -94,6 +93,28 @@ public class PlayerController {
 
         model.addAttribute("player", player);
         model.addAttribute("clubName", clubName);
-        return "player";
+        return "redirect:/players";
+//        return "player";
+    }
+
+    @GetMapping("/{playerId}/addPosition")
+    public String addPosition(Model model) {
+//        List<Position> positions = positionRepository.displayAllPosition();
+//        model.addAttribute("positions", positions);
+        return "addPosition";
+    }
+
+    @PostMapping("/{playerId}/addPosition")
+    public String addPositions(
+            @PathVariable String playerId,
+            @RequestParam String positionName,
+            Model model) throws SQLException {
+
+        String positionId = positionRepository.findPositionIdByName(positionName);
+        if (availablePositionRepository.save(playerId, positionId) == null) {
+            model.addAttribute("errorMessage", "Position does not exist. Please try again.");
+            return "addPosition";
+        }
+        return "redirect:/players/{playerId}";
     }
 }

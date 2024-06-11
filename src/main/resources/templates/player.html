@@ -42,7 +42,10 @@
     </div>
     <hr class="my-4">
     <div>
-        <h3>가능한 포지션</h3>
+        <div style="display: flex; align-items: center;">
+            <h3 style="flex: 1;">가능한 포지션</h3>
+            <button class="btn btn-primary" style="margin-left: 10px;" th:onclick="|location.href='@{/players/{playerId}/addPosition(playerId=${player.playerId})}'|">포지션 추가</button>
+        </div>
         <table class="table">
             <thead>
             <tr>
@@ -56,6 +59,8 @@
             </tbody>
         </table>
     </div>
+
+
     <hr class="my-4">
     <div>
         <h3>획득한 트로피</h3>
