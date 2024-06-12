@@ -38,12 +38,6 @@ public class PlayerRepository {
         template.update(sql, playerId);
     }
 
-//    public void update(String memberId, int money) throws SQLException {
-//        String sql = "update member set money=? where member_id=?";
-//        template.update(sql, money, memberId);
-//    }
-
-
     public Player findById(String playerId) throws SQLException {
         String sql = "select * from Player where Id = ?";
         return template.queryForObject(sql, playerRowMapper(), playerId);
